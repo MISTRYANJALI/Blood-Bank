@@ -1,0 +1,319 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="donormaster.master.cs" Inherits="user_donormaster" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    
+
+    <title></title>
+   
+    <link href="img/logo.png" rel="icon"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
+        rel="stylesheet"/>
+    <!-- Bootstrap CSS File -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Libraries CSS Files -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="lib/animate/animate.min.css" rel="stylesheet"/>
+    <link href="lib/venobox/venobox.css" rel="stylesheet"/>
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"/>
+    <!-- Main Stylesheet File -->
+    <link href="css/style.css" rel="stylesheet" />
+
+    <!-- table-->
+    <link href="js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+
+    <!--fa fa icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+    
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+  </style>
+
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+
+
+   <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <header id="header"style="background-color:Black!important" >
+    <div class="container" >
+   
+      <div id="logo" class="pull-left">
+        <!-- Uncomment below if you prefer to use a text logo -->
+        <!-- <h1><a href="#main">C<span>o</span>nf</a></h1>-->
+        <a href="#intro" class="scrollto" style="font-size:large;color:red"><img src="img/logo.png" alt="" title="" height="100px!important" ><b>Save Life</b></a>
+      </div>
+
+     <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li><a href="donoruser.aspx">Home</a></li>
+          <li><a href="donoruser.aspx#schedule">Camp</a></li>
+          <li><a href="pickup.aspx">Pickup Blood</a></li>
+         <li> <asp:HyperLink ID="lnkfpwd" runat="server" ForeColor="Silver" style="cursor:pointer">History</asp:HyperLink></li>
+
+
+          <li><a href="donoruser.aspx#gallery">Gallery</a></li>
+      
+
+           <li><asp:LinkButton ID="lnkbtndonate" runat="server" onclick="lnkbtndonate_Click" >DONATE REQUEST</asp:LinkButton></li>
+          <li class="buy-tickets"><a href="../main/mainhome.aspx"><i class="fa fa-sign-out"> </i><b>Sign Out</b></a></li>
+
+            <li> <div class="dropdown">
+             <asp:Image ID="Imguser" runat="server" class="rounded-circle" alt="User" width="50px" height="50px"></asp:Image>
+            
+            <div class="dropdown-content" style="background-color:white;color:Black!important">
+            <a href="changepwd.aspx">Change Password</a>
+            <asp:LinkButton ID="LinkButton1" runat="server" onclick="logout_Click">Sign Out</asp:LinkButton>
+            <a href="profiledata.aspx">User Profile</a>
+          </div>
+           </div> 
+            </li>
+
+            </ul>
+            </nav>
+          </div>
+     
+       
+     <!-- #nav-menu-container -->
+    
+   
+  </header>
+    <!-- #header -->
+   
+  
+  <!-- model-->
+  
+      <cc1:ModalPopupExtender ID="ModalPopupExtender2" runat="server" PopupControlID="divForget"
+        TargetControlID="lnkfpwd" CancelControlID="btnClose1" BackgroundCssClass="modalBackground">
+    </cc1:ModalPopupExtender>
+        <div class="modal-dialog" id="divForget" runat="server" style="display: none;width:70%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                       <b>HISTORY</b> </h4>
+                    <%--<button type="button" class="close">
+                        &times;</button>--%>
+                </div>
+                <div class="modal-body">
+                <table>
+                     <tr>
+                        <td>Blood Group</td>
+                        <td>
+                            <asp:Label ID="lblgrp" runat="server" Text=""></asp:Label>
+                         </td>
+                     </tr>
+
+                      <tr>
+                        <td>QUANTITY</td>
+                        <td>
+                            <asp:Label ID="lblqty" runat="server" Text=""></asp:Label>
+                         </td>
+                     </tr>
+
+                      <tr>
+                        <td>UNIT</td>
+                        <td>
+                            <asp:Label ID="lblunit" runat="server" Text=""></asp:Label>
+                         </td>
+                     </tr>
+            
+                     <tr>
+                        <td>Last Donate</td>
+                        <td>
+                            <asp:Label ID="lbllast" runat="server" Text=""></asp:Label>
+                         </td>
+                     </tr>
+
+                        
+                </table>
+                  
+
+                    
+                </div>
+           
+                <div class="modal-footer">
+                    <asp:Button ID="btnmore" class="btn btn-danger" runat="server" 
+                        Text="More History" onclick="btnmore_Click" />
+                    <asp:Button ID="btnClose1" class="btn btn-danger" runat="server" Text="CLOSE" />
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="lblfmsg" runat="server" Text="" class="text-danger"></asp:Label>
+                </div>
+
+                </div>  
+            </div>
+       
+
+
+
+   <!--end model-->
+
+
+
+
+
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+ 
+    <!--==========================
+    Footer
+  ============================-->
+     <footer id="footer">
+  <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="fa fa-angle-right"></i> <a href="donoruser.aspx">Home</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="donoruser.aspx#schedule">Camp</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="donoruser.aspx#gallery">Gallery</a></li>
+               <li><i class="fa fa-angle-right"></i> <a href="pickup.aspx">Pickup Blood</a></li>
+               <li><i class="fa fa-angle-right"></i> <a href="donaterequest.aspx">Donate request</a></li>
+
+            </ul>
+          </div>
+
+          <div class="col-lg-6 footer-links">
+            <h4>About Us</h4>
+            <p>
+              The software system being produced is call Online Blood bank basically it is a blood bank management system online our system provides the information about blood donors and who need a blood.
+System gives result to blood requester based on city and blood group who nearest by them and give a efficient result and after blood donation gives a remainder to donor and also provide the information about blood donation camp available in city.
+In our system there are 5 modules about blood group management , donor information , receiver information , admin , camp.
+First of all donor register information and get username and password them login into our system and also receiver register in system and get username And password and login in to system.
+Whenever user request for blood nearest donor list is provide based on city wise.
+If donor not able to come at nearest blood bank so then ewe provide facility of collect blood from the home.
+</p>
+           
+          </div>
+
+       <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Feed Back</h4>
+                    <asp:TextBox ID="txtmsg" runat="server" placeholder="MESSAGE" class="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
+<br />
+                   <asp:TextBox ID="txtemail" runat="server" placeholder="EMAIL" class="form-control" TextMode="email" ></asp:TextBox>
+                   <br />
+                        
+
+                   <i class="fa fa-star" style="font-size:24px" id="rate0" runat="server" onclick="iclick(0)"></i>
+                   <i class="fa fa-star" style="font-size:24px" id="rate1" runat="server" onclick="iclick(1)"></i>
+                   <i class="fa fa-star" style="font-size:24px" id="rate2" runat="server" onclick="iclick(2)"></i>
+                   <i class="fa fa-star" style="font-size:24px" id="rate3" runat="server" onclick="iclick(3)"></i>
+                   <i class="fa fa-star" style="font-size:24px" id="rate4" runat="server" onclick="iclick(4)"></i>
+           
+                   <br /><br />
+                   <div>
+                   
+                      <asp:HiddenField ID="hfstar" runat="server"></asp:HiddenField>
+                   
+                   </div>
+                   <asp:Button ID="btnsubmit" runat="server" Text="SUBMIT" 
+                  class="btn btn-danger" onclick="btnsubmit_Click"></asp:Button>
+                  <br />
+                           <br />
+            <br />
+
+           
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+   </footer>
+
+
+
+
+      </form>
+
+
+
+    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/jquery/jquery-migrate.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/superfish/hoverIntent.js"></script>
+    <script src="lib/superfish/superfish.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/venobox/venobox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="contactform/contactform.js"></script>
+    <!-- Template Main Javascript File -->
+    <script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!--Modal-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+    <style type="text/css">
+        
+     .rate-class
+     {
+         color:Red;
+         }
+    </style>
+
+ 
+    <script type="text/javascript">
+        function iclick(number) {
+            for (var i = 0; i <= 4; i++) {
+                $("#rate" + i).removeClass("rate-class");
+            }
+
+            for (var i = 0; i <= number; i++) {
+                document.getElementById("<%= hfstar.ClientID %>").value = i+1;
+            $("#rate" + i).addClass("rate-class");
+        }
+    }
+
+    function starrating() {
+        alert("test");
+    }
+    </script>
+
+<script src="js/dataTables/jquery.dataTables.js"></script>
+    <script src="js/dataTables/dataTables.bootstrap.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+
+   
+    </script>    
+</body>
+</html>
